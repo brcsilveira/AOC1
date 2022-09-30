@@ -75,4 +75,4 @@ add $t1, $t1, $t5
 sub $t1, $t1, $t6
 
 #### armazena o resultado na memória
-sw $t1, 0x18($t0) # grava o resultado em "y" (word que inicia na posição 0x10010004)
+sw $t1, 0x18($t0) # grava o resultado em "y" (word que inicia na posição 0x10010018)
