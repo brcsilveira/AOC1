@@ -15,16 +15,27 @@
 	ori $t1, $zero, 1	# seta o contador em 1
 
 loop:
-	beq $t1, $t2, fim	# se t1 for igual a t2 pula pro fim
+	beq $t1, $t2, estado	# se t1 for igual a t2 pula pro fim
 	lw $t3, 0($s1)		# carrega em t3 o elemento do vetor
 	addi $s1, $s1, 4	# incrementa para próxima posição do vetor
 	lw $t4, 0($s1)		# carrega em t4 o próximo elemento do vetor
 	
 	slt $t0, $t4, $t3	# compara se tá em ordem crescente, caso não: t0 = 1
-	bnez $t0, fim
-	
+	bnez $t0, estado
+
 	addi $t1, $t1, 1	# incrementa t1
 	j loop
 
-fim:   
-	nop			# fim
+estado:
+   	bnez $t0, desordenado
+	beqz $t0, ordenado
+
+ordenado:
+	addi $t0, $zero, 1
+	j fim
+
+desordenado:
+	addi $t0, $zero, 0
+	j fim
+fim:
+	nop			#fim do programa
